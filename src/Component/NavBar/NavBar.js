@@ -7,7 +7,7 @@ export default function NavBar(){
     return(
         <Navbar bg="light" expand="lg">
         <Container>
-          <img src="mi-app/public/image/HiTech-recortada.png" alt="logo" className="logo"/>
+          <img src="./image/HiTech-recortada .png" alt="logo" className="logo"/>
         <Navbar.Brand href="#home">HiTech</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

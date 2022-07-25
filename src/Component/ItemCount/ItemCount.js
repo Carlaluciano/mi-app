@@ -19,10 +19,10 @@ export default function ItemCount({stock, initial, onAdd}){
 
     return(
         <div>
-            <Button onClick={Increment}>+</Button>
+            <Button onClick={Increment}>+</Button><br/>
             <p>{count}</p>
             <Button onClick={Decrement}>-</Button><br/>
-            <Button onClick={onAdd}> Agregar al Carrito</Button>
+            <Button onClick={onAdd} disabled={stock===0|count===0?true:null}> Agregar al Carrito</Button>
         </div>
  ) 
 }

@@ -1,6 +1,7 @@
-import ItemCount from "../ItemCount/ItemCount"
+
 import { useState, useEffect } from "react";
 import ItemList from "../ItemList/ItemList";
+import { listaProductos } from "../../Productos/Productos";
 
 
 
@@ -12,7 +13,7 @@ export default function ItemListContainer(props){
         let condition = true
         setTimeout(() => {
             if(condition){
-                resolve(Productos);
+                resolve(listaProductos);
             }else{
                 reject('Error');
             }
@@ -27,15 +28,10 @@ export default function ItemListContainer(props){
 
 
 
-    const handleOnAdd = (quantity) => {
-        console.log("Agregando al carrito", quantity);
-}
-
-    return(
+ return(
         <>
         <h1>{props.greeting}</h1>
-        <ItemCount stock="15" initial={1} onAdd={handleOnAdd}/>
-        <ItemList Productos={Productos}/>
+       <ItemList Productos={Productos}/>
        
 
         </>
