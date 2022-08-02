@@ -1,21 +1,26 @@
-import { Card, Button,} from "react-bootstrap"
+import { Button} from "react-bootstrap"
+import { Link } from "react-router-dom"
+import '../Item/Item.css'
 
 
 
 export default function Item({Productos}){
     return(
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-md-6">
-      <Card style={{ width: '18rem'  }}>
-      <Card.Img variant="top" src={Productos.img} />
-      <Card.Body>
-        <Card.Title>{Productos.name}</Card.Title>
-        <Button variant="outline-secondary">Ver Mas</Button>
-       </Card.Body>
-    </Card>
+
+     <div className="container">
+        <div className="card">
+        <div className="titulo">
+        <h2>{Productos.name}</h2>
+      </div>
+      <div>
+        <img src={Productos.img} alt={Productos.name} className="imagen"/> 
+      </div>
+      <Link to={`/item/${Productos.id}`}> <Button variant="secondary">Ver Detalle</Button></Link>
     </div>
     </div>
-</div>
-)
+
+
+    )
 }
+
+

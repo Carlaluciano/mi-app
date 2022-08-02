@@ -4,16 +4,20 @@ import ItemListContainer from './Component/ItemListContainer/ItemListContainer';
 import ItemDetailContainer from './Component/ItemDetailContainer/ItemDetailContainer';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 
+import {BrowserRouter, Routes, Route } from 'react-router-dom';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-       <NavBar/>
-       <ItemListContainer greeting="Tienda de Tecnologia"/>
-        <ItemDetailContainer/>
-       
-       </header>
+      <BrowserRouter>
+        <NavBar/>
+        <Routes>
+          <Route path="/" element={<ItemListContainer greeting="Tienda de Tecnologia" style={{}}/>} />
+          <Route path="/category/:categoryId" element={<ItemListContainer greeting="Filtrando Categorias"/>} />
+          <Route path="/item/:productoId" element={<ItemDetailContainer/>} />
+           </Routes>
+      </BrowserRouter>
     </div>
   );
 }

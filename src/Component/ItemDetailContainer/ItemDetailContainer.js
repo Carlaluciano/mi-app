@@ -1,33 +1,35 @@
 import {useState , useEffect} from 'react';
 import ItemDetail from '../ItemDetail/ItemDetail';
-import {listaProductos} from '../../Productos/Productos';
+import { useParams } from 'react-router-dom';
+import { getProductoById } from '../../Productos/Productos';   
+import { Spinner } from 'react-bootstrap'; 
+import '../ItemDetailContainer/ItemDetailContainer.css';
 
 
 
 export default function ItemDetailContainer(){
     const [Producto, setProducto] = useState([]);
+    const [Loading, setLoading] = useState(true);
 
-    //Promesa
-    const getProductoDetail = new Promise((resolve, reject) => {
-        let condition = true
-        setTimeout(() => {
-            if(condition){
-                resolve(listaProductos[1]);
-            }else{
-                reject('Error');
-            }
-        }, 2000);
-    })
-
+    const {productoId} = useParams();
+    
     useEffect(() => {
-        getProductoDetail
-        .then(res => setProducto(res))
+        getProductoById(productoId)
+        .then(response => {setProducto(response)})
         .catch(err => console.log(err))
-    })
+        .finally(() => setLoading(false)); 
+    });
 
+    if(Loading){
+        return <Spinner animation="border" variant="secondary" />
+    }
+
+    
     return(
         <>
+        <div className="greeting">
         <h2>Detalle del Producto</h2>
+        </div>
         <ItemDetail Producto={Producto}/>
         </>
     )
