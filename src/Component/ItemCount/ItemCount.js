@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import { Button } from 'react-bootstrap';
+import "../ItemCount/ItemCount.css"
 
 
 export default function ItemCount({stock, initial, onAdd}){
@@ -18,15 +19,13 @@ export default function ItemCount({stock, initial, onAdd}){
    
 
     return(
-            <div className="row">
-                <div className="col-md-6">
-
-            <Button variant="outline-secondary" onClick={Increment}>+</Button>
-            <p>{count}</p>
+            <div >
             <Button variant="outline-secondary" onClick={Decrement}>-</Button>
-            <Button variant="outline-secondary" onClick={onAdd} disabled={stock===0|count===0?true:null}> Agregar al Carrito</Button>
+            <p className='contador'>{count}</p>
+            <Button variant="outline-secondary" onClick={Increment}>+</Button>
+            <Button variant="outline-secondary" onClick={() => onAdd(count)} disabled={stock===0|count===0?true:null}> Agregar al Carrito</Button>
         </div>
-        </div>
+        
  ) 
 }
 

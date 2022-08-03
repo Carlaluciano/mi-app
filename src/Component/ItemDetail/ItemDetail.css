@@ -1,0 +1,17 @@
+.imagen{
+    width: 100%;
+
+}
+
+.card{
+    display: flex;
+    margin: 50px;
+    
+}
+
+.titulo{
+    text-align: center;
+}
+
+
+

@@ -1,27 +1,47 @@
-import { Card,  } from "react-bootstrap"
+
+import { Link } from "react-router-dom"
 import ItemCount from "../ItemCount/ItemCount"
-
-
-
+import { useState } from "react";
+import "../Item/Item.css"
 
 
 
 export default function ItemDetail({Producto}){
-const handleOnAdd = (quantity) => {
-    console.log(quantity);
-}
+const [count, setCount] = useState(0);	
+ 
+   
+ 
+ const handleOnAdd = (count) => {
+     setCount(count);
+    }
 
     return(
-      <Card style={{ width: '18rem'  }}>
-      <Card.Img  src={Producto.img} />
-      <Card.Body>
-        <Card.Title>{Producto.name}</Card.Title>
-        <Card.Title>{Producto.description}</Card.Title>
-        <Card.Title>Stock:{Producto.stock}</Card.Title>
-        <Card.Title>Precio:${Producto.price}</Card.Title>
-        <ItemCount stock={Producto.stock} initial={0} onAdd={handleOnAdd}/>
+
+      <div className="itemdetail-container">
+        <div className="card">
+        <div className="titulo">
+        <h2>{Producto.name}</h2>
+      </div>
+      <div>
+        <img src={Producto.img} alt={Producto.name} className="imagen"/> 
+      </div>
+      <div className="descripcion">
+       <p>{Producto.description}</p>
+       <p>Stock:{Producto.stock}</p>
+       <p>Precio:${Producto.price}</p>
+     </div>
+     { count > 0 ? <Link to='/cart'>Ir al Carrito</Link> : <ItemCount stock={Producto.stock} initial={1} onAdd={handleOnAdd} />}
+     </div>
+    </div>
+    
+        
       
-        </Card.Body>
-    </Card>
-)
+      
+      
+    )
 }
+
+   
+    
+    
+

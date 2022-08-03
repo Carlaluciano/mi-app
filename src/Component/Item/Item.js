@@ -7,7 +7,7 @@ import '../Item/Item.css'
 export default function Item({Productos}){
     return(
 
-     <div className="container">
+     <div className="item-container">
         <div className="card">
         <div className="titulo">
         <h2>{Productos.name}</h2>

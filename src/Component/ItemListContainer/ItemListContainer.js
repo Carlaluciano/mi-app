@@ -9,8 +9,10 @@ import '../ItemListContainer/ItemListContainer.css'
 
 
 
+
 export default function ItemListContainer(props){
     const [Productos, setProductos] = useState([]);
+    
    
     
 
@@ -34,13 +36,18 @@ export default function ItemListContainer(props){
         getProductoByCategory(categoryId)
         .then(res => setProductos(res))
         .catch(err => console.log(err))
+        
     
     }else{
         getProductos
         .then(res => setProductos(res))
         .catch(err => console.log(err))
         
+
+        
     }
+
+
    
    
   
