@@ -3,8 +3,11 @@ import {Container, Nav,Navbar, NavDropdown} from 'react-bootstrap';
 import CartWidget from '../CartWidget/CartWidget'; 
 
 
+
+
 export default function NavBar(){
-    return(
+
+   return(
         <Navbar bg="light" expand="lg">
         <Container>
           <img src="./image/Logo.png" alt="logo" className="logo"/>

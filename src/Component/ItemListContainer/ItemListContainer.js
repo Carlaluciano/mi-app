@@ -42,16 +42,11 @@ export default function ItemListContainer(props){
         getProductos
         .then(res => setProductos(res))
         .catch(err => console.log(err))
-        
+        }
 
-        
-    }
+    });
+      
 
-
-   
-   
-  
-});
 
 
 
