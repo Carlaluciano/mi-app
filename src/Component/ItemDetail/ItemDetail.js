@@ -12,12 +12,16 @@ const [ quantity, setQuantity] = useState(0);
 	
 const { addToCart, getProductQuantity } = useContext(CartContext);
    
-const quantityAdded = getProductQuantity (Producto.id);; 
+const quantityAdded = getProductQuantity (Producto.id);
 
  
     const handleOnAdd = (quantity) => {
+      console.log('agregando al carrito');
+      console.log(quantity);
       setQuantity(quantity)
-      addToCart(Producto, quantity);
+      addToCart({Producto, quantity});
+     
+      
     }
 
     return(

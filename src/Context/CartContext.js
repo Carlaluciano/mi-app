@@ -8,7 +8,7 @@ export const CartContext = createContext({});
     const addToCart = (productToAdd) => {
         if(!isInCart (productToAdd.id)){
         setCart([...cart, productToAdd]);
-    } else {
+    }else {
       const cartUpdated = cart.map(prod => {
         if(prod.id === productToAdd.id){
          const productUpdated = {
@@ -42,7 +42,7 @@ export const CartContext = createContext({});
 
     const removeFromCart = (id) => {
        const newCart = cart.filter(prod => prod.id !== id);
-         setCart(newCart);
+        setCart(newCart);
     }
 
     const clearCart = () => {
@@ -52,7 +52,7 @@ export const CartContext = createContext({});
     const getProductQuantity = (id) => {
         const product = cart.find(prod => prod.id === id);
 
-        return product?.quantity;
+      return product?.quantity;
     }
 
 

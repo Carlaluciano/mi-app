@@ -3,10 +3,9 @@ import { useContext } from "react"
 
 
 export default function CartWidget(){
-  
-  const{  getQuantity } = useContext(CartContext);
 
-  const quantity = getQuantity
+   const {getQuantity} = useContext(CartContext);
+   const quantity = getQuantity();
 
   
   
