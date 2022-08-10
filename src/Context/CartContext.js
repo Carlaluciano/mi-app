@@ -1,9 +1,17 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 
 export const CartContext = createContext({});
 
  export const CartContextProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
+    const [totalProduct, setTotalProduct] = useState(0);
+    const [totalToPay, setTotalToPay] = useState(0);
+
+    useEffect(() => {
+      totalProductAdd()
+      totalToPayAdd()
+    }, [cart]); // eslint-disable-line
+
 
     const addToCart = (productToAdd) => {
         if(!isInCart (productToAdd.id)){
@@ -23,7 +31,23 @@ export const CartContext = createContext({});
       setCart(cartUpdated)
       }}
   
-  
+      
+     const totalProductAdd =() => {
+      let total = 0;
+      cart.forEach(product => {
+        total += product.quantity;
+      })
+      setTotalProduct(total);
+    }
+
+    const totalToPayAdd = () => {
+      let total = 0;
+      cart.forEach(product => {
+        total += product.quantity * product.price;
+      })
+      setTotalToPay(total);
+    }
+
   
     const getQuantity = () => {
       let accu = 0;
@@ -57,11 +81,10 @@ export const CartContext = createContext({});
 
 
     return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart, isInCart, clearCart, getQuantity, getProductQuantity}}>
+        <CartContext.Provider value={{ cart, totalProduct, totalToPay, addToCart, removeFromCart, isInCart, clearCart, getQuantity, getProductQuantity }}>
             {children}
         </CartContext.Provider>
     );
 }
-
-
+ 
 

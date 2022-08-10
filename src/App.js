@@ -5,6 +5,8 @@ import ItemDetailContainer from './Component/ItemDetailContainer/ItemDetailConta
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import {BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CartContextProvider } from './Context/CartContext';
+import { ChakraProvider } from '@chakra-ui/react';
+
 
 
 
@@ -12,6 +14,7 @@ import { CartContextProvider } from './Context/CartContext';
 function App() {
   return (
     <div className="App">
+      <ChakraProvider resetCSS>
       <CartContextProvider>
     <BrowserRouter>
         <NavBar/>
@@ -23,7 +26,9 @@ function App() {
            </Routes>
       </BrowserRouter>
       </CartContextProvider>
+      </ChakraProvider>
       </div>
+
   );
 }
 
