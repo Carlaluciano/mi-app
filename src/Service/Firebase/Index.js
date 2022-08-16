@@ -15,4 +15,5 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-export const bd = getFirestore(app);
+
+export const baseDatos = getFirestore(app);

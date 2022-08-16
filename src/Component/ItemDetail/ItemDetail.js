@@ -16,8 +16,6 @@ const quantityAdded = getProductQuantity (Producto.id);
 
  
     const handleOnAdd = (quantity) => {
-      console.log('agregando al carrito');
-      console.log(quantity);
       setQuantity(quantity)
       addToCart({Producto, quantity});
      

@@ -1,6 +1,7 @@
 import CartItems from '../CartItem/CartItem';
 import { CartContext } from '../../Context/CartContext.js';
 import { useContext } from 'react';
+import { Button } from 'react-bootstrap';
 
 
 
@@ -8,7 +9,7 @@ import { useContext } from 'react';
 
 
         
-       export default function Cart(id, name, price, img, stock, description) {
+       export default function Cart() {
         
         const {cart, totalPrice, clearAllCart } = useContext(CartContext);
 
@@ -16,19 +17,22 @@ import { useContext } from 'react';
         const totalPriceCart = totalPrice();
 
    return(
-      <div className="CartContainer">
-          {cart.map(p => <CartItems key={p.id} {...p}/>)}
-          <div className='cartInfoContainer'>
-              <div className='cartTextContainer'>
-                  <h3>El precio total es:</h3><span>${totalPriceCart}</span>
-              </div>
-              <div className='cartButtonContainer'>
-                  <button>Generar orden de compra</button>
-                  <button onClick={()=>clearAllCart()}>Vaciar el carrito</button>
-              </div>
-          </div>
-          
-      </div>
+         <div className="cart-container">
+                <div className="cart-header">
+                    <h1>Carrito de Compras</h1>
+                    <p>{cart.length} productos</p>
+                    <p>Total: ${totalPriceCart}</p>
+                    </div>
+                <div className="cart-items">
+                    {cart.map(product => (
+                        <CartItems key={product.id} {...product} />
+                    ))}
+                    <Button variant="outline-secondary" onClick={clearAllCart} >Vaciar Carrito</Button>
+                    <Button variant="outline-secondary" >Generar Orden</Button>
+                </div>
+            </div>
+    
+      
   )
 }    
         

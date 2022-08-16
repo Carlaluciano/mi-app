@@ -1,10 +1,11 @@
 
 import { useState, useEffect } from "react";
 import ItemList from "../ItemList/ItemList";
-import { listaProductos } from "../../Productos/Productos";
 import { useParams } from "react-router-dom";
-import {  getProductoByCategory } from "../../Productos/Productos";
 import '../ItemListContainer/ItemListContainer.css'
+import { getDocs, collection, query, where } from "firebase/firestore";
+import { baseDatos } from "../../Service/Firebase/Index";
+import { Spinner } from "react-bootstrap";
 
 
 
@@ -12,39 +13,40 @@ import '../ItemListContainer/ItemListContainer.css'
 
 export default function ItemListContainer(props){
     const [Productos, setProductos] = useState([]);
+    const [loading, setLoading] = useState(true);
     
    
-    
-
-
     const {categoryId} = useParams();
 
-    //Promesa
-    const getProductos = new Promise((resolve, reject) => {
-        let condition = true
-        setTimeout(() => {
-            if(condition){
-                resolve(listaProductos);
-            }else{
-                reject('Error');
-            }
-        }, 2000);
-    })
 
- useEffect(() => {
-    if(categoryId){
-        getProductoByCategory(categoryId)
-        .then(res => setProductos(res))
-        .catch(err => console.log(err))
-        
-    
-    }else{
-        getProductos
-        .then(res => setProductos(res))
-        .catch(err => console.log(err))
-        }
+// Accediendo a los productos de la base de datos Firebase
+useEffect(() => {
+    setLoading(true)
 
-    });
+    const collectionrefenrence = !categoryId
+    ? collection (baseDatos, 'listaProductos')
+    : query (collection (baseDatos, 'listaProductos'), where ('category', '==', categoryId));
+     
+    getDocs(collectionrefenrence).then(resp =>{
+        const Productos = resp.docs.map(doc => {
+            const valor = doc.data();
+            return {id: doc.id, ...valor}
+        })
+       setProductos(Productos)
+     }).catch(error =>{
+            console.log(error)
+        }).finally(() =>{
+            setLoading(false)
+        })
+
+
+},[categoryId])
+
+if(loading){
+    return <Spinner animation="border" variant="secondary" />
+}
+
+
       
 
 
