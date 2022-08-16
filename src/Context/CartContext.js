@@ -1,20 +1,14 @@
-import { useState, createContext, useEffect } from "react";
+import { useState, createContext } from "react";
 
 export const CartContext = createContext({});
 
  export const CartContextProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
-    const [totalProduct, setTotalProduct] = useState(0);
-    const [totalToPay, setTotalToPay] = useState(0);
+  
 
-    useEffect(() => {
-      totalProductAdd()
-      totalToPayAdd()
-    }, [cart]); // eslint-disable-line
-
-
-    const addToCart = (productToAdd) => {
-        if(!isInCart (productToAdd.id)){
+   
+const addToCart = (productToAdd) => {
+        if(!inTheCart (productToAdd.id)){
         setCart([...cart, productToAdd]);
     }else {
       const cartUpdated = cart.map(prod => {
@@ -32,24 +26,8 @@ export const CartContext = createContext({});
       }}
   
       
-     const totalProductAdd =() => {
-      let total = 0;
-      cart.forEach(product => {
-        total += product.quantity;
-      })
-      setTotalProduct(total);
-    }
-
-    const totalToPayAdd = () => {
-      let total = 0;
-      cart.forEach(product => {
-        total += product.quantity * product.price;
-      })
-      setTotalToPay(total);
-    }
-
-  
-    const getQuantity = () => {
+    
+    const getQuantityCart = () => {
       let accu = 0;
         cart.forEach(prod => {
         accu += prod.quantity;
@@ -59,9 +37,9 @@ export const CartContext = createContext({});
     }
     
 
-    const isInCart = (id) => {
-        return cart.some(prod => prod.id === id);
-    }
+    const inTheCart = (id) => {
+      return cart.some(prod => prod.id === id);
+  }
 
 
     const removeFromCart = (id) => {
@@ -69,7 +47,7 @@ export const CartContext = createContext({});
         setCart(newCart);
     }
 
-    const clearCart = () => {
+    const cleanTheCart = () => {
         setCart([]);
     }
 
@@ -79,12 +57,24 @@ export const CartContext = createContext({});
       return product?.quantity;
     }
 
+    const totalPrice = () =>{
+      let index = 0
+      cart.forEach(item =>{
+          index += item.quantity * item.price
+      })
+      return index
+  }
+
+  
 
     return (
-        <CartContext.Provider value={{ cart, totalProduct, totalToPay, addToCart, removeFromCart, isInCart, clearCart, getQuantity, getProductQuantity }}>
+        <CartContext.Provider value={{ cart, addToCart, removeFromCart, inTheCart, cleanTheCart, getQuantityCart, getProductQuantity, totalPrice  }}>
             {children}
         </CartContext.Provider>
     );
-}
- 
+};
+
+    
+
+
 

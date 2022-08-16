@@ -9,7 +9,7 @@ import {Link} from 'react-router-dom';
 export default function NavBar(){
 
    return(
-    <Navbar bg="light" expand="lg">
+    <Navbar className="navBg" bg="light" expand="lg">
         <Container>
           <img src="./image/Logo.png" alt="logo" className="logo"/>
         <Nav.Link as={Link} to='/'>HiTech</Nav.Link>

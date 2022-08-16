@@ -1,11 +1,11 @@
-import { CartContext } from "../../Context/CartContext"
+import { CartContext } from "../../Context/CartContext.js"
 import { useContext } from "react"
 
 
 export default function CartWidget(){
 
-   const {getQuantity} = useContext(CartContext);
-   const quantity = getQuantity();
+   const {getQuantityCart} = useContext(CartContext);
+   const quantity = getQuantityCart();
 
   
   

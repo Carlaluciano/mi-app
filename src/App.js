@@ -5,7 +5,7 @@ import ItemDetailContainer from './Component/ItemDetailContainer/ItemDetailConta
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import {BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CartContextProvider } from './Context/CartContext';
-import { ChakraProvider } from '@chakra-ui/react';
+import Cart from './Component/Cart/Cart';
 
 
 
@@ -14,20 +14,18 @@ import { ChakraProvider } from '@chakra-ui/react';
 function App() {
   return (
     <div className="App">
-      <ChakraProvider resetCSS>
-      <CartContextProvider>
+     <CartContextProvider>
     <BrowserRouter>
         <NavBar/>
         <Routes>
           <Route path="/" element={<ItemListContainer greeting="Tienda de Tecnologia" style={{}}/>} />
           <Route path="/category/:categoryId" element={<ItemListContainer greeting="Filtrando Categorias"/>} />
           <Route path="/item/:productoId" element={<ItemDetailContainer/>} />
-          <Route path='/cart' element={<h1>Cart</h1>}/>
+          <Route path='/cart' element={<Cart/>} />
            </Routes>
       </BrowserRouter>
       </CartContextProvider>
-      </ChakraProvider>
-      </div>
+    </div>
 
   );
 }
