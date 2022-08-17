@@ -7,17 +7,17 @@ import { CartContext } from "../../Context/CartContext";
 
 
 
-export default function ItemDetail({Producto}){
+export default function ItemDetail({img, price, description, stock, name, id}){
 const [ quantity, setQuantity] = useState(0);
 	
 const { addToCart, getProductQuantity } = useContext(CartContext);
    
-const quantityAdded = getProductQuantity (Producto.id);
+const quantityAdded = getProductQuantity (id);
 
  
     const handleOnAdd = (quantity) => {
       setQuantity(quantity)
-      addToCart({Producto, quantity});
+      addToCart({img, price, description, stock, name, id, quantity});
      
       
     }
@@ -27,17 +27,17 @@ const quantityAdded = getProductQuantity (Producto.id);
       <div className="itemdetail-container">
         <div className="card">
         <div className="titulo">
-        <h2>{Producto.name}</h2>
+        <h2>{name}</h2>
       </div>
       <div>
-        <img src={Producto.img} alt={Producto.name} className="imagen"/> 
+        <img src={img} alt={name} className="imagen"/> 
       </div>
       <div className="descripcion">
-       <p>{Producto.description}</p>
-       <p>Stock:{Producto.stock}</p>
-       <p>Precio:${Producto.price}</p>
+       <p>{description}</p>
+       <p>Stock:{stock}</p>
+       <p>Precio:${price}</p>
      </div>
-     { quantity > 0 ? <Link to='/cart' variant="outline-secondary">Ir al carrito</Link> : <ItemCount stock={Producto.stock} initial={quantityAdded} onAdd={handleOnAdd} />}
+     { quantity > 0 ? <Link to='/cart' variant="outline-secondary">Ir al carrito</Link> : <ItemCount stock={stock} initial={quantityAdded} onAdd={handleOnAdd} />}
      </div>
     </div>
     

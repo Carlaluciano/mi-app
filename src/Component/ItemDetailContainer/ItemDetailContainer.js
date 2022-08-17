@@ -36,7 +36,7 @@ export default function ItemDetailContainer(){
         <div className="greeting">
         <h2>Detalle del Producto</h2>
         </div>
-        <ItemDetail Producto={Producto}/>
+        <ItemDetail {...Producto}/>
         </>
     )
 }
