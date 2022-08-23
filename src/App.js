@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CartContextProvider } from './Context/CartContext';
 import Cart from './Component/Cart/Cart';
+import Checkout from './Component/Checkout/Checkout';
 
 
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/category/:categoryId" element={<ItemListContainer greeting="Filtrando Categorias"/>} />
           <Route path="/item/:productoId" element={<ItemDetailContainer/>} />
           <Route path='/cart' element={<Cart/>} />
+          <Route path='/Checkout' element={<Checkout />}/>
            </Routes>
       </BrowserRouter>
       </CartContextProvider>

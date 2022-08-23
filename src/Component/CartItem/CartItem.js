@@ -5,10 +5,10 @@ import { CartContext } from '../../Context/CartContext'
 
 export default function CartItems ({id, name, quantity, price, img, description}) {
 
-    const {removeItem} = useContext(CartContext)
+    const {removeFromCart} = useContext(CartContext)
 
     const remove = (id) =>{
-        removeItem(id)
+        removeFromCart(id)
     }
 
     
