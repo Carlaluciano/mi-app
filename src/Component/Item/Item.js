@@ -7,7 +7,8 @@ import '../Item/Item.css'
 export default function Item({Productos}){
     return(
 
-     <div className="item-container">
+    
+        <div className="item">
         <div className="card">
         <div className="titulo">
         <h2>{Productos.name}</h2>
@@ -18,6 +19,8 @@ export default function Item({Productos}){
       <Link to={`/item/${Productos.id}`}> <Button variant="secondary">Ver Detalle</Button></Link>
     </div>
     </div>
+   
+    
 
 
     )

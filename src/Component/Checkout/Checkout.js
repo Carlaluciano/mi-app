@@ -1,3 +1,4 @@
+
 import { addDoc, collection, getDocs, Timestamp, query, where, documentId, writeBatch } from 'firebase/firestore'
 import { baseDatos } from '../../Service/Firebase/Index'
 import { Button } from 'react-bootstrap'
@@ -5,6 +6,8 @@ import { CartContext } from '../../Context/CartContext'
 import { useContext, useState } from 'react'
 import Swal from 'sweetalert2'
 import { Form } from 'react-bootstrap'
+import '../Checkout/Checkout.css'
+
 
 
 export default function Checkout(){
@@ -15,7 +18,7 @@ export default function Checkout(){
     const [mail, setMail] = useState("");
 const { cart, totalPriceCart, cleanTheCart } = useContext(CartContext)
 
-if(compra ===1){
+if(compra === 1){
     return(
         <div>
         <h1>Muchas gracias por confiar en nosotros, {nombre}</h1>
@@ -45,7 +48,7 @@ const order = {
      const ref = collection(baseDatos, 'listaProductos')
 
      const productFromFirestore = await getDocs(query(ref, where(documentId(), 'in', id)))
-     //console.log(productFromFirestore)
+     
      
      const { docs } = productFromFirestore
 
@@ -71,13 +74,11 @@ const order = {
 
      if(noStock.length === 0) {
         const orderRef = collection(baseDatos, 'orders')
-
         const orderAdd = await addDoc(orderRef, order)
-        batch.commit()
-        console.log(orderAdd.id)
-        cleanTheCart()
-        setNumeroOrden(orderAdd.id)
-        setCompra(1)
+       batch.commit()
+       cleanTheCart()
+      setNumeroOrden(orderAdd.id)
+       setCompra(1)
     }else{
         Swal.fire({
             icon: 'error',
@@ -96,7 +97,7 @@ const order = {
 
   return(
    
-<Form>
+<Form className='form'  onSubmit={newOrder}>
 
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Nombre</Form.Label>
@@ -116,13 +117,10 @@ const order = {
         <Form.Control type="Email" placeholder="Ingrese Email" onChange={(e) => {setMail(e.target.value);}}/>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
-      <Button variant="outline-secondary" onClick={newOrder}>Realizar compra</Button>
+       </Form.Group>
+      <Button variant="outline-secondary" type='submit' onClick={newOrder}>Realizar compra</Button>
     </Form>
    
   )
 }
-
-
 

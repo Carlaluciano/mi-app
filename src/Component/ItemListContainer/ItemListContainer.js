@@ -43,7 +43,7 @@ useEffect(() => {
 },[categoryId])
 
 if(loading){
-    return <Spinner animation="border" variant="secondary" />
+    return <Spinner className="spinner" animation="border" variant="secondary" />
 }
 
 

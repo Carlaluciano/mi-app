@@ -27,7 +27,7 @@ export default function ItemDetailContainer(){
     },[productoId]) 
 
     if(Loading){
-        return <Spinner animation="border" variant="secondary" />
+        return <Spinner className='spinner' animation="border" variant="secondary" />
     }
 
     
@@ -36,7 +36,9 @@ export default function ItemDetailContainer(){
         <div className="greeting">
         <h2>Detalle del Producto</h2>
         </div>
+        <div className='detalle'>
         <ItemDetail {...Producto}/>
+        </div>
         </>
     )
 }

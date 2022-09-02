@@ -14,26 +14,7 @@ export default function Cart() {
         
         const totalPriceCart = totalPrice();
 
-        /*const newOrder = () => {
-          const order = {
-           buyer:{
-            nombre: "Carla Luciano",
-            telefono: "2477357326",
-            email: 'carla.luciano@hormail.com'
-        },
-           items: cart,
-           total: totalPriceCart,
-           date: Timestamp.fromDate(new Date())
-           
-           
-
-          }
-         
-         addDoc(collection(baseDatos, 'orders'), order).then (response => {
-            console.log(response)
-         })
-        }*/
-
+    
 
      
         return(

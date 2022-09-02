@@ -5,3 +5,9 @@
     text-align: center;
     margin-top: 1em;
 }
+
+.spinner{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+  }
