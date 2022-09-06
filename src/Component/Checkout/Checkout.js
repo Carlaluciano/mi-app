@@ -1,7 +1,5 @@
-
 import { addDoc, collection, getDocs, Timestamp, query, where, documentId, writeBatch } from 'firebase/firestore'
 import { baseDatos } from '../../Service/Firebase/Index'
-import { Button } from 'react-bootstrap'
 import { CartContext } from '../../Context/CartContext'
 import { useContext, useState } from 'react'
 import Swal from 'sweetalert2'
@@ -16,7 +14,8 @@ export default function Checkout(){
     const [nombre, setNombre] = useState("");
     const [telefono, setTelefono] = useState(0);
     const [mail, setMail] = useState("");
-const { cart, totalPriceCart, cleanTheCart } = useContext(CartContext)
+
+    const { cart, totalPriceCart, cleanTheCart } = useContext(CartContext)
 
 if(compra === 1){
     return(
@@ -28,8 +27,19 @@ if(compra === 1){
 }
 
 
-const newOrder = async () => {
+const newOrder = async (e) => {
 try{
+
+  e.preventDefault();
+
+  if(cart.length === 0){
+    Swal.fire({
+        icon: 'error',
+        title: 'Carrito vacío',
+        text: 'Selecciona un producto para añadir al carrito',
+    })
+    return false;
+}
 
 const order = {
      buyer:{
@@ -76,9 +86,18 @@ const order = {
         const orderRef = collection(baseDatos, 'orders')
         const orderAdd = await addDoc(orderRef, order)
        batch.commit()
+       const orderNum = orderAdd.id
        cleanTheCart()
-      setNumeroOrden(orderAdd.id)
+       setNumeroOrden(orderNum)
        setCompra(1)
+        
+       Swal.fire({
+        icon: 'success',
+        title: 'Compra Realizada',
+        text: 'Su compra fue realizada con exito!',
+        })
+
+       
     }else{
         Swal.fire({
             icon: 'error',
@@ -87,17 +106,15 @@ const order = {
           })
     }
 } catch(error){
-    console.log(error)
-}finally{
-    console.log('Ya no se ejecuta la Orden')
+   
 }
 
 }
 
 
   return(
-   
-<Form className='form'  onSubmit={newOrder}>
+ 
+   <Form className='form'  onSubmit={newOrder}>
 
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Nombre</Form.Label>
@@ -118,8 +135,8 @@ const order = {
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
        </Form.Group>
-      <Button variant="outline-secondary" type='submit' onClick={newOrder}>Realizar compra</Button>
-    </Form>
+       <input type='submit' value='realizar compra' className='Comprar'/> 
+       </Form>
    
   )
 }

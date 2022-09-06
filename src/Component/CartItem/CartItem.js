@@ -1,18 +1,16 @@
-import { useContext } from 'react'
-import { CartContext } from '../../Context/CartContext'
+import '../CartItem/CartItem.css'
 
 
 
 export default function CartItems ({id, name, quantity, price, img, description}) {
 
-    const {removeFromCart} = useContext(CartContext)
 
-    const remove = (id) =>{
-        removeFromCart(id)
-    }
+
+  
 
     
     return(
+        
         <div className="cartItemsContainer">
             <div className='cartImgContainer'>
                 <img src={img} alt='Foto producto'/>
@@ -32,9 +30,7 @@ export default function CartItems ({id, name, quantity, price, img, description}
                     <p>Subtotal:</p><span>${quantity * price}</span>
                 </div>
             </div>
-            <button onClick={() => remove(id)} className='cartItemsButtonContainer'>
-                X
-            </button>
+           
         </div>
     )
 }
